@@ -1,0 +1,38 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+    <script type="text/javascript">
+        Ext.onReady(function(){
+            var vp = new Ext.ux.MainViewport({
+                listeners: {
+                    afterrender: function(){
+                        var body = Ext.getCmp('game-panel').body;
+                        var scene = new Ext.game.Scene(body, 200, 100);
+                        var group = new Ext.ux.Group({
+                            name: 'Test'
+                        });
+                        var u1 = new Ext.game.Unit({
+                            center: Point(30, 30),
+                            name: 'Unit 1'
+                        });
+                        var u2 = new Ext.game.Unit({
+                            center: Point(40, 30),
+                            name: 'Unit 2'
+                        });
+                        var u3 = new Ext.game.Unit({
+                            center: Point(40, 35),
+                            name: 'Unit 3',
+                            enableDD: false
+                        });
+                        scene.add(u1);
+                        scene.add(u2);                  
+                        scene.add(u3); 
+                        group.add(u1, u2, u3);                                 
+                        scene.render();
+                        Ext.ux.GroupsStore.addGroup(group);
+                    }
+                }
+            });
+        });
+    </script>
+{% endblock %}
